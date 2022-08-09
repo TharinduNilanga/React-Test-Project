@@ -16,24 +16,45 @@ class Cart extends Component{
                 { userName:'Nilanga '},
 
             ],
-           productTitle:[]
+           productTitle:[
+               { title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops'},
+               { title: 'Mens Casual Premium Slim Fit T-Shirts'},
+               { title: 'Mens Cotton Jacket'},
+               { title: '"Mens Casual Slim Fit'},
+               { title: 'Solid Gold Petite Micropave'},
+               { title: 'Pierced Owl Rose Gold Plated Stainless Steel Double'},
+               { title: 'WD 2TB Elements Portable External Hard Drive - USB 3.0'},
+           ],
+            formData:{
+                userName: '',
+                date:'',
+                tittle:'',
+                qty:''
+            }
         }
 
     }
     componentDidMount() {
-        this.loadTittle()
+     /*   this.loadTittle()*/
     }
 
     loadTittle=async ()=>{
-        let res=await CartService.fetchTittle();
+       /* let res=await CartService.fetchTittle();
         if (res.status==200){
             res.data.map((value,index)=>{
-                console.log(value.title)
                 this.setState({
-                    productTitle: {value}
+                    productTitle:value.title
                 })
+                console.log(value.title)
             })
             // console.log(res.data.tittle.map((value) => (row.tittle)))
+        }*/
+    }
+    handleSubmit=async ()=>{
+    let data=this.state.formData
+        let res=await CartService.cartPost(data)
+        if (res.status==200){
+            alert("success")
         }
     }
     render() {
@@ -63,14 +84,16 @@ class Cart extends Component{
                                     (option) => option.userName
                                 }
                                 onChange={(e, value) => {
-                                    /*  console.log(value.label + " " + value.year);*/
+                                    let formData=this.state.formData
+                                    formData.userName=value.label
+                                    this.setState({formData})
+
                                 }}
                                 size="small"
                                 style={{ width: '100%' }}
                             />
 
                         </Grid>
-
                         <Grid item lg={6} md={6} sm={6} xs={6}>
                             <TextField
                                 id="outlined-basic"
@@ -81,7 +104,11 @@ class Cart extends Component{
                                 style={{
                                     width: '100%',
                                     backgroundColor:'white'}}
+                                value={this.state.formData.date}
                                 onChange={(e)=>{
+                                    let formData=this.state.formData
+                                    formData.date=e.target.value
+                                    this.setState({formData})
 
                                 }}
                             />
@@ -93,10 +120,15 @@ class Cart extends Component{
                                 id="combo-box-demo"
                                 options={this.state.productTitle}
                                 sx={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="product Title" />}
-
+                                renderInput={(params) => <TextField {...params} label="title" />}
+                                getOptionLabel={
+                                    (option) => option.title
+                                }
                                 onChange={(e, value) => {
-                                    /*  console.log(value.label + " " + value.year);*/
+                                    let formData=this.state.formData
+                                    formData.title=value.label
+                                    this.setState({formData})
+
                                 }}
                                 size="small"
                                 style={{ width: '100%' }}
@@ -112,7 +144,11 @@ class Cart extends Component{
                                 variant="outlined"
                                 size="small"
                                 style={{width: '100%'}}
+                                value={this.state.formData.qty}
                                 onChange={(e)=>{
+                                    let formData=this.state.formData
+                                    formData.qty=e.target.value
+                                    this.setState({formData})
 
                                 }}
                                 validators={['required', 'isPositive']}
@@ -125,7 +161,7 @@ class Cart extends Component{
                                 color='primary'
                                 variant="contained"
                                 label="clear"
-                                type="submit"
+
                                 style={{marginRight:'30px'}}
 
                             />

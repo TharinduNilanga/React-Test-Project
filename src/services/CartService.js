@@ -1,9 +1,9 @@
 import axios from "../axios";
 
 class CartService {
-    fetchTittle = async () => {
+    cartPost = async (data) => {
         const promise = new Promise((resolve, reject) => {
-            axios.get('products')
+            axios.get('carts',data)
                 .then((res) => {
                     return resolve(res)
                 })
