@@ -8,7 +8,7 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import UserForm from "../User";
 import {useHref} from "react-router-dom";
 import DashBoard from "../DashBoard";
-import Link from "@mui/material/Link";
+import { Link } from 'react-router-dom';
 
 
 class Login extends Component{
@@ -74,19 +74,17 @@ class Login extends Component{
                     </ValidatorForm>
                 </div>
                 <div className={classes.btnRow}>
-                    <Link to="/user">
-                    <GDSEButton
-                        size="large"
-                        color={'primary'}
-                        variant="contained"
-                        label="Login"
-
-                    />
+                    <Link to="/dash">
+                        <GDSEButton
+                            size="large"
+                            color={'primary'}
+                            variant="contained"
+                            label="Login"/>
                     </Link>
                 </div>
                 <div className={classes.signUp}>
                     <Typography style={{color:'black',marginLeft:'10%'}}  variant="h6">Create new user account ?  </Typography>
-                    <Typography style={{color:'blue'}}  variant="h6">click here</Typography>
+                 <Link to="/user">   <Typography style={{color:'blue'}}  variant="h6">click here</Typography></Link>
                 </div>
 
             </div>

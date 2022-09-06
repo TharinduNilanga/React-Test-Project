@@ -12,14 +12,14 @@ function App() {
     //<UserForm/>
      // <DashBoard/>
     // <Product/>
-   <Cart/>
-     /* <Routes>
+   //<Cart/>
+      <Routes>
         <Route exact path='/' element={<Login/>}/>
         <Route  path='/user' element={<UserForm/>}/>
         <Route  path='/dash' element={<DashBoard/>}/>
         <Route  path='/product' element={<Product/>}/>
         <Route  path='/cart' element={<Cart/>}/>
-      </Routes>*/
+      </Routes>
   );
 }
 
